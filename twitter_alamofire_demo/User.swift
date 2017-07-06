@@ -12,10 +12,12 @@ class User {
     
     var default_profile_image: Bool
     var followersCount: Int?
+    var followingCount: Int?
     var name: String = ""
     var screenName: String = ""
     var description: String = ""
     var profileImageURL: URL?
+    var profileBannerURL: URL?
     var dictionary: [String: Any]?
     private static var _current: User? 
     
@@ -47,12 +49,15 @@ class User {
         screenName = dictionary["screen_name"] as? String ?? ""
         description = dictionary["description"] as? String ?? ""
         followersCount = dictionary["followers_count"] as? Int
+        followingCount = dictionary["friends_count"] as? Int
         default_profile_image = dictionary["default_profile_image"] as! Bool
-        if !default_profile_image {
-            if let urlString = dictionary["profile_image_url_https"] as? String {
-                profileImageURL = URL(string: urlString)
-            }
+        if let bannerString =  dictionary["profile_banner_url"] as? String {
+            profileBannerURL = URL(string: bannerString)
         }
+        if let urlString = dictionary["profile_image_url_https"] as? String {
+            profileImageURL = URL(string: urlString)
+        }
+        
     }
     
 }

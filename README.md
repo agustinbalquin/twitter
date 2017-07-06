@@ -22,9 +22,9 @@ The following **required** functionality is completed:
 The following **optional** features are implemented:
 
 - [ ] Tweet Details Page: User can tap on a tweet to view it, with controls to retweet, favorite, and reply.
-- [ ] User can view their profile in a profile tab
+- [x] User can view their profile in a profile tab
 - [x] User should display the relative timestamp for each tweet "8m", "7h"
-- [ ] User should be able to unretweet and unfavorite and should decrement the retweet and favorite count.
+- [x] User should be able to unretweet and unfavorite and should decrement the retweet and favorite count.
 - [ ] Links in tweets are clickable
 - [ ] User can tap the profile image in any tweet to see another user's profile
    - [ ] Contains the user header view: picture and tagline
@@ -34,7 +34,7 @@ The following **optional** features are implemented:
 - [ ] When composing, you should have a countdown in the upper right for the tweet limit.
 - [ ] After creating a new tweet, a user should be able to view it in the timeline immediately without refetching the timeline from the network.
 - [ ] User can reply to any tweet, and replies should be prefixed with the username and the reply_id should be set when posting the tweet
-- [ ] Profile view should include that user's timeline
+- [x] Profile view should include that user's timeline
 - [ ] Pulling down the profile page should blur and resize the header image.
 
 The following **additional** features are implemented:
