@@ -37,6 +37,7 @@ class TweetCell: UITableViewCell {
             retweetCountLabel.text = String(describing: tweet.retweetCount as! Int)
             createdAtLabel.text = tweet.createdAtString as? String
             refreshCell()
+            refreshCellRt()
         }
     }
     
@@ -66,6 +67,20 @@ class TweetCell: UITableViewCell {
         favButton.setImage(UIImage(named:img), for: .normal)
         var count = tweet.favoriteCount
         favCountLabel.text = String(describing: count!)
+    }
+    
+    func refreshCellRt() {
+        var img = ""
+        // var img = tweet.favorited! ? "favor-icon-red" : "favor-icon"
+        if tweet.retweeted == true {
+            img = "retweet-icon-green"
+        } else {
+            img = "retweet-icon"
+        }
+        rtButton.setImage(UIImage(named:img), for: .normal)
+        var count = tweet.retweetCount
+        retweetCountLabel.text = String(describing: count)
+
     }
     
     
@@ -112,7 +127,7 @@ class TweetCell: UITableViewCell {
                     var rts = self.tweet.retweetCount
                     rts += 1
                     self.tweet.retweetCount = rts
-                    self.refreshCell()
+                    self.refreshCellRt()
                 } else if let error = error {
                     print("Could not retweet tweet: " + error.localizedDescription)
                 }
@@ -125,7 +140,7 @@ class TweetCell: UITableViewCell {
                     var rts = self.tweet.retweetCount
                     rts -= 1
                     self.tweet.retweetCount = rts
-                    self.refreshCell()
+                    self.refreshCellRt()
                 } else if let error = error {
                     print("Could not unretweet: " + error.localizedDescription)
                 }
