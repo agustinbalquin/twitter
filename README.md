@@ -30,7 +30,7 @@ The following **optional** features are implemented:
    - [ ] Contains the user header view: picture and tagline
    - [ ] Contains a section with the users basic stats: # tweets, # following, # followers
    - [ ] Profile view should include that user's timeline
-- [ ] User can load more tweets once they reach the bottom of the feed using infinite loading similar to the actual Twitter client.
+- [x] User can load more tweets once they reach the bottom of the feed using infinite loading similar to the actual Twitter client.
 - [ ] When composing, you should have a countdown in the upper right for the tweet limit.
 - [ ] After creating a new tweet, a user should be able to view it in the timeline immediately without refetching the timeline from the network.
 - [ ] User can reply to any tweet, and replies should be prefixed with the username and the reply_id should be set when posting the tweet

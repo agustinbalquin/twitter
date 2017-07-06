@@ -8,11 +8,12 @@
 
 import UIKit
 
-class TimelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class TimelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     
     var tweets: [Tweet] = []
     
     @IBOutlet weak var tableView: UITableView!
+    var isMoreDataLoading = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -113,10 +114,26 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
     func loadMoreData() {
         APIManager.shared.getHomeTimeLine { (tweets, error) in
             if let tweets = tweets {
-                self.tweets = tweets
+                self.tweets += tweets
                 self.tableView.reloadData()
             } else if let error = error {
                 print("Error getting home timeline: " + error.localizedDescription)
+            }
+        }
+    }
+    
+    // Infinite Scroll
+    // ====================
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if (!isMoreDataLoading) {
+            // Calculate the position of one screen length before the bottom of the results
+            let scrollViewContentHeight = tableView.contentSize.height
+            let scrollOffsetThreshold = scrollViewContentHeight - tableView.bounds.size.height
+            
+            // When the user has scrolled past the threshold, start requesting
+            if(scrollView.contentOffset.y > scrollOffsetThreshold && tableView.isDragging) {
+                isMoreDataLoading = true
+                loadMoreData()
             }
         }
     }
@@ -128,7 +145,13 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
 
 extension TimelineViewController: ComposeControllerDelegate {
     func did(post: Tweet) {
-        loadMoreData()
+        let alertController = UIAlertController(title: "Success", message: "Tweet was posted", preferredStyle: .alert)
+        
+        // create an OK action
+        let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in }
+        alertController.addAction(OKAction)
+        
+        self.present(alertController, animated: true) { }
     }
 }
 
