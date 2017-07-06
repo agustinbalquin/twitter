@@ -12,6 +12,7 @@ import AlamofireImage
 class TweetCell: UITableViewCell {
     
 
+    @IBOutlet weak var retweetButton: UIButton!
     @IBOutlet weak var favCountLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var screenNameLabel: UILabel!
@@ -55,7 +56,8 @@ class TweetCell: UITableViewCell {
     // ===============
     func refreshCell() {
         var img = ""
-        if tweet.favorited == true {
+//        var img = tweet.favorited! ? "favor-icon-red" : "favor-icon"
+        if tweet.favorited! == true {
             img = "favor-icon-red"
         } else {
             img = "favor-icon"
@@ -69,14 +71,14 @@ class TweetCell: UITableViewCell {
     // Favorite tweet
     // ==================
     @IBAction func favoriteTweet(_ sender: Any) {
-        if tweet.favorited == false {
+        if tweet.favorited! == false {
             print("favorite")
-            tweet.favorited = true
-            var favs = tweet.favoriteCount!
-            favs += 1
-            tweet.favoriteCount = favs
             APIManager.shared.favorite(tweet) { (tweet: Tweet?,error: Error?) in
                 if let tweet = tweet {
+                    self.tweet.favorited = true
+                    var favs = self.tweet.favoriteCount!
+                    favs += 1
+                    self.tweet.favoriteCount = favs
                     self.refreshCell()
                 } else if let error = error {
                     print("Could not favorite tweet: " + error.localizedDescription)
@@ -84,12 +86,12 @@ class TweetCell: UITableViewCell {
             }
         } else {
             print("unfavorite")
-            tweet.favorited = false
-            var favs = tweet.favoriteCount!
-            favs -= 1
-            tweet.favoriteCount = favs
             APIManager.shared.unfavorite(tweet) { (tweet: Tweet?,error: Error?) in
                 if let tweet = tweet {
+                    self.tweet.favorited = false
+                    var favs = self.tweet.favoriteCount!
+                    favs -= 1
+                    self.tweet.favoriteCount = favs
                     self.refreshCell()
                 } else if let error = error {
                     print("Could not favorite tweet: " + error.localizedDescription)
@@ -98,5 +100,38 @@ class TweetCell: UITableViewCell {
         }
     }
     
+    // Retweet tweet
+    // =================
+    @IBAction func retweetTweet(_ sender: Any) {
+        if tweet.retweeted == false {
+            print("retweet")
+            APIManager.shared.retweet(tweet) { (tweet: Tweet?,error: Error?) in
+                if let retweet = tweet {
+                    self.tweet.retweeted = true
+                    var rts = self.tweet.retweetCount
+                    rts += 1
+                    self.tweet.retweetCount = rts
+                    self.refreshCell()
+                } else if let error = error {
+                    print("Could not retweet tweet: " + error.localizedDescription)
+                }
+            }
+        } else {
+            print("unretweet")
+            
+            APIManager.shared.unfavorite(tweet) { (tweet: Tweet?,error: Error?) in
+                if let retweet = tweet {
+                    self.tweet.retweeted = false
+                    var rts = self.tweet.retweetCount
+                    rts -= 1
+                    self.tweet.retweetCount = rts
+                    self.refreshCell()
+                } else if let error = error {
+                    print("Could not favorite tweet: " + error.localizedDescription)
+                }
+            }
+        }
+
+    }
     
 }

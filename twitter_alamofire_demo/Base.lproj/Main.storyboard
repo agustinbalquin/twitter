@@ -117,6 +117,9 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BLg-5F-aNJ">
                                                     <rect key="frame" x="158" y="64" width="30" height="30"/>
                                                     <state key="normal" image="retweet-icon"/>
+                                                    <connections>
+                                                        <action selector="retweetTweet:" destination="U1g-kw-izy" eventType="touchUpInside" id="Az4-CR-AQL"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JHg-5M-n7b">
                                                     <rect key="frame" x="196" y="69" width="19" height="21"/>
@@ -168,6 +171,7 @@
                                             <outlet property="favButton" destination="rHV-yy-W5H" id="NEm-x1-oGt"/>
                                             <outlet property="favCountLabel" destination="ig9-OT-4k5" id="Qjw-ee-UdT"/>
                                             <outlet property="nameLabel" destination="RRL-xE-Bvx" id="Y9T-G2-Lbf"/>
+                                            <outlet property="retweetButton" destination="BLg-5F-aNJ" id="RGG-Xl-8Bx"/>
                                             <outlet property="retweetCountLabel" destination="JHg-5M-n7b" id="STL-qO-47M"/>
                                             <outlet property="rtButton" destination="BLg-5F-aNJ" id="RdQ-Xp-l09"/>
                                             <outlet property="screenNameLabel" destination="xeZ-cH-pGx" id="mFN-YY-jso"/>
