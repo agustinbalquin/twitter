@@ -118,8 +118,7 @@ class TweetCell: UITableViewCell {
             }
         } else {
             print("unretweet")
-            
-            APIManager.shared.unfavorite(tweet) { (tweet: Tweet?,error: Error?) in
+            APIManager.shared.unretweet(tweet) { (tweet: Tweet?,error: Error?) in
                 if let retweet = tweet {
                     self.tweet.retweeted = false
                     var rts = self.tweet.retweetCount
@@ -127,7 +126,7 @@ class TweetCell: UITableViewCell {
                     self.tweet.retweetCount = rts
                     self.refreshCell()
                 } else if let error = error {
-                    print("Could not favorite tweet: " + error.localizedDescription)
+                    print("Could not unretweet: " + error.localizedDescription)
                 }
             }
         }

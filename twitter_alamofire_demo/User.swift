@@ -11,7 +11,7 @@ import Foundation
 class User {
     
     var default_profile_image: Bool
-    var followers_count: Int?
+    var followersCount: Int?
     var name: String = ""
     var screenName: String = ""
     var description: String = ""
@@ -46,7 +46,7 @@ class User {
         name = dictionary["name"] as? String ?? ""
         screenName = dictionary["screen_name"] as? String ?? ""
         description = dictionary["description"] as? String ?? ""
-        followers_count = dictionary["followers_count"] as? Int
+        followersCount = dictionary["followers_count"] as? Int
         default_profile_image = dictionary["default_profile_image"] as! Bool
         if !default_profile_image {
             if let urlString = dictionary["profile_image_url_https"] as? String {
