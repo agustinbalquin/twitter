@@ -38,11 +38,9 @@ class Tweet {
         formatter.dateFormat = "E MMM d HH:mm:ss Z y"
         // Convert String to Date
         let date = formatter.date(from: createdAtOriginalString)!
-        // Configure output format
-        formatter.dateStyle = .short
-        formatter.timeStyle = .none
+        
         // Convert Date to String
-        createdAtString = formatter.string(from: date)
+        createdAtString = date.getElapsedInterval()
         
         
     }
@@ -50,6 +48,32 @@ class Tweet {
         return array.flatMap({ (dictionary) -> Tweet in
             Tweet(dictionary: dictionary)
         })
+    }
+}
+
+// Date since
+// =============
+extension Date {
+    func getElapsedInterval() -> String {
+        
+        let interval = Calendar.current.dateComponents([.day, .hour, .minute], from: self, to: Date())
+        
+        let formatter = DateFormatter()
+        // Configure output format
+        formatter.dateStyle = .short
+        formatter.timeStyle = .none
+        
+        if let day = interval.day, day > 0 {
+            return "\(day)d"
+        } else if let hour = interval.hour, hour > 0 {
+            return "\(hour)h"
+        } else if let minute = interval.minute, minute > 0 {
+            return "\(minute)m"
+        } else if let second = interval.second, second > 0 {
+            return "\(second)s"
+        } else {
+            return formatter.string(from: self)
+        }
     }
 }
 
