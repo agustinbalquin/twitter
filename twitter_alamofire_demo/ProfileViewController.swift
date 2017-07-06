@@ -62,7 +62,10 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tweets.count
+        if tweets != nil {
+            return tweets.count
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -86,12 +89,12 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     // Reload Tweet Data
     // ====================
     func reloadTweetData() {
-        APIManager.shared.getHomeTimeLine { (tweets, error) in
+        APIManager.shared.getUserTimeLine { (tweets, error) in
             if let tweets = tweets {
                 self.tweets = tweets
                 self.tableView.reloadData()
             } else if let error = error {
-                print("Error getting home timeline: " + error.localizedDescription)
+                print("Error getting user timeline: " + error.localizedDescription)
             }
         }
     }
