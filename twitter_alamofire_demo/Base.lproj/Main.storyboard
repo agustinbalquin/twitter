@@ -576,21 +576,11 @@
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qRO-N5-GT6">
-                                <rect key="frame" x="267" y="128" width="92" height="30"/>
+                                <rect key="frame" x="242" y="128" width="117" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Set up profile">
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RYu-vp-Nqh">
-                                <rect key="frame" x="221" y="131" width="30" height="25"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="account-icon"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PAh-MZ-WfE">
-                                <rect key="frame" x="172" y="128" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="gear"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Following" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b4r-jR-m8f">
                                 <rect key="frame" x="38" y="202" width="73" height="21"/>
@@ -625,6 +615,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Profile" image="profile-Icon" id="l93-WO-req"/>
                     <connections>
+                        <outlet property="editProfile" destination="qRO-N5-GT6" id="dAv-wS-PSd"/>
                         <outlet property="followersCount" destination="Lbc-DN-sZr" id="ESS-K8-xiX"/>
                         <outlet property="followingCount" destination="slB-fN-HfG" id="ggu-lK-okM"/>
                         <outlet property="nameLabel" destination="YsV-vD-8EP" id="48r-pC-vEx"/>
@@ -641,12 +632,10 @@
     </scenes>
     <resources>
         <image name="TwitterLogoBlue" width="200" height="200"/>
-        <image name="account-icon" width="30" height="25"/>
         <image name="back-icon" width="30" height="30"/>
         <image name="cowboy" width="940" height="637"/>
         <image name="edit-icon" width="30" height="27"/>
         <image name="favor-icon" width="30" height="30"/>
-        <image name="gear" width="48" height="48"/>
         <image name="home-icon" width="30" height="30"/>
         <image name="profile-Icon" width="26" height="26"/>
         <image name="pusheen" width="500" height="500"/>

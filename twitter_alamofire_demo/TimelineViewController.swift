@@ -152,6 +152,9 @@ extension TimelineViewController: ComposeControllerDelegate {
         alertController.addAction(OKAction)
         
         self.present(alertController, animated: true) { }
+        self.tweets.insert(post, at: 0)
+        self.tableView.reloadData()
+
     }
 }
 

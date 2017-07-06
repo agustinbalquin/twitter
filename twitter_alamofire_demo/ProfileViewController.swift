@@ -16,6 +16,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var userBannerView: UIImageView!
     @IBOutlet weak var userImageView: UIImageView!
+    @IBOutlet weak var editProfile: UIButton!
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -46,6 +47,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         reloadUserData()
         reloadTweetData()
+        
+        editProfile.backgroundColor = .clear
+        editProfile.layer.cornerRadius = 5
+        editProfile.layer.borderWidth = 1
+        editProfile.layer.borderColor = UIColor.lightGray.cgColor
         
     }
 
