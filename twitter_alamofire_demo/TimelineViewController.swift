@@ -66,6 +66,36 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         APIManager.shared.logout()
     }
     
+    // Prepare for Segue
+    // ====================
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "composeSegue" {
+            let composeController = segue.destination as! ComposeController
+            composeController.delegate = self
+        } else if segue.identifier == "tweetViewSegue" {
+            let tweetViewController = segue.destination as! TweetViewController
+            let cell = sender as! TweetCell
+            if let indexPath = tableView.indexPath(for: cell) {
+                let tweet:Tweet = tweets[indexPath.row]
+                print(tweet.text)
+                tweetViewController.tweet = tweet
+            }
+            
+        }
+    }
+    
+
+    
+    
+    
+    // Compose tweet
+    // ===============
+    @IBAction func composeTweet(_ sender: Any) {
+        performSegue(withIdentifier: "composeSegue", sender: nil)
+    }
+    
+    // Refresh Control
+    // ==================
     func refreshControlAction(_ refreshControl: UIRefreshControl) {
         APIManager.shared.getHomeTimeLine { (tweets, error) in
             if let tweets = tweets {
@@ -78,5 +108,54 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
+    // LoadMoreData
+    // ============
+    func loadMoreData() {
+        APIManager.shared.getHomeTimeLine { (tweets, error) in
+            if let tweets = tweets {
+                self.tweets = tweets
+                self.tableView.reloadData()
+            } else if let error = error {
+                print("Error getting home timeline: " + error.localizedDescription)
+            }
+        }
+    }
     
+
+    
+    
+}
+
+extension TimelineViewController: ComposeControllerDelegate {
+    func did(post: Tweet) {
+        loadMoreData()
+    }
+}
+
+// Date since
+// =============
+extension Date {
+    func getElapsedInterval() -> String {
+        
+        let interval = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: self, to: Date())
+        
+        if let year = interval.year, year > 0 {
+            return year == 1 ? "\(year)" + " " + "YEAR AGO" :
+                "\(year)" + " " + "YEARS AGO"
+        } else if let month = interval.month, month > 0 {
+            return month == 1 ? "\(month)" + " " + "MONTH AGO" :
+                "\(month)" + " " + "MONTHS AGO"
+        } else if let day = interval.day, day > 0 {
+            return day == 1 ? "\(day)" + " " + "DAY AGO" :
+                "\(day)" + " " + "DAYS AGO"
+        } else if let hour = interval.hour, hour > 0 {
+            return hour == 1 ? "\(hour)" + " " + "HOUR AGO" :
+                "\(hour)" + " " + "HOURS AGO"
+        } else if let minute = interval.minute, minute > 0 {
+            return minute == 1 ? "\(minute)" + " " + "MINUTE AGO" :
+                "\(minute)" + " " + "MINUTES AGO"
+        } else {
+            return "A MOMENT AGO"
+        }
+    }
 }
