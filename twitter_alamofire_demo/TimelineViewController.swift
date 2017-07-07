@@ -45,11 +45,19 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
-        
-        cell.tweet = tweets[indexPath.row]
-        
-        return cell
+        let rowTweet = tweets[indexPath.row]
+        if let rowUser = rowTweet.retweetedByUser {
+            print("retweet")
+            let cell = tableView.dequeueReusableCell(withIdentifier: "RetweetCell", for: indexPath) as! RetweetCell
+            cell.retweeter = rowUser
+            cell.tweet = rowTweet
+            return cell
+        } else {
+            print("regular tweet")
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
+            cell.tweet = rowTweet
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
