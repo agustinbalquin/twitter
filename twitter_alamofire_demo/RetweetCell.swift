@@ -37,6 +37,7 @@ class RetweetCell: UITableViewCell {
                 userImageView.af_setImage(withURL: url)
                 userImageView.layer.cornerRadius = userImageView.frame.size.width/2
             }
+
             retweetCountLabel.text = String(describing: tweet.retweetCount as! Int)
             createdAtLabel.text = tweet.createdAtString as? String
             refreshCell()

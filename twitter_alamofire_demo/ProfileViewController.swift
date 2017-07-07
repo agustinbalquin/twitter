@@ -131,6 +131,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             print(url)
             userImageView.af_setImage(withURL: url)
         }
+        if let bUrl:URL = user.profileBannerURL {
+            userBannerView.af_setImage(withURL: bUrl)
+        }
         print("banner?")
         if let bannerUrl = user.profileImageURL {
             userImageView.af_setImage(withURL: bannerUrl)
