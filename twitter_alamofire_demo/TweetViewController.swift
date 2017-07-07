@@ -12,7 +12,8 @@ class TweetViewController: UIViewController {
 
     @IBOutlet weak var tweetLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
-    @IBOutlet weak var nameLabel: UILabel!
+
+    @IBOutlet weak var nameButton: UIButton!
     @IBOutlet weak var userPicture: UIImageView!
     
     var tweet:Tweet! {
@@ -40,13 +41,21 @@ class TweetViewController: UIViewController {
     
     func reloadData() {
         tweetLabel.text = tweet.text
-        usernameLabel.text = tweet.user.screenName
-        nameLabel.text = tweet.user.name
+        usernameLabel.text = "@\(tweet.user.screenName)"
+        nameButton.setTitle(tweet.user.name, for: .normal)
         if let url:URL = tweet.user.profileImageURL {
             userPicture.af_setImage(withURL: url)
         }
     }
 
+    @IBAction func userLink(_ sender: Any) {
+        performSegue(withIdentifier: "linkSegue", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let profileViewController = segue.destination as! ProfileViewController
+        profileViewController.user = self.tweet.user
+    }
     
 
 }

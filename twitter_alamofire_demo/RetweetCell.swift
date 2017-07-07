@@ -1,16 +1,14 @@
 //
-//  TweetCell.swift
+//  RetweetCell.swift
 //  twitter_alamofire_demo
 //
-//  Created by Charles Hieger on 6/18/17.
+//  Created by Agustin Balquin on 7/7/17.
 //  Copyright © 2017 Charles Hieger. All rights reserved.
 //
 
 import UIKit
-import AlamofireImage
 
-class TweetCell: UITableViewCell {
-    
+class RetweetCell: UITableViewCell {
 
     @IBOutlet weak var retweetButton: UIButton!
     @IBOutlet weak var favCountLabel: UILabel!
@@ -20,10 +18,15 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var retweetCountLabel: UILabel!
     @IBOutlet weak var createdAtLabel: UILabel!
+    @IBOutlet weak var retweeterLabel: UILabel!
     
     @IBOutlet weak var rtButton: UIButton!
     @IBOutlet weak var favButton: UIButton!
-    
+    var retweeter:User! {
+        didSet {
+            retweeterLabel.text = retweeter.name
+        }
+    }
     var tweet: Tweet! {
         didSet {
             tweetTextLabel.text = tweet.text
@@ -58,7 +61,7 @@ class TweetCell: UITableViewCell {
     // ===============
     func refreshCell() {
         var img = ""
-//        var img = tweet.favorited! ? "favor-icon-red" : "favor-icon"
+        //        var img = tweet.favorited! ? "favor-icon-red" : "favor-icon"
         if tweet.favorited! == true {
             img = "favor-icon-red"
         } else {
@@ -80,7 +83,7 @@ class TweetCell: UITableViewCell {
         rtButton.setImage(UIImage(named:img), for: .normal)
         var count = tweet.retweetCount
         retweetCountLabel.text = String(describing: count)
-
+        
     }
     
     
@@ -146,7 +149,7 @@ class TweetCell: UITableViewCell {
                 }
             }
         }
-
+        
     }
-    
+
 }

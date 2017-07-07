@@ -26,10 +26,10 @@ The following **optional** features are implemented:
 - [x] User should display the relative timestamp for each tweet "8m", "7h"
 - [x] User should be able to unretweet and unfavorite and should decrement the retweet and favorite count.
 - [ ] Links in tweets are clickable
-- [ ] User can tap the profile image in any tweet to see another user's profile
-   - [ ] Contains the user header view: picture and tagline
-   - [ ] Contains a section with the users basic stats: # tweets, # following, # followers
-   - [ ] Profile view should include that user's timeline
+- [x] User can tap the profile image in any tweet to see another user's profile
+   - [x] Contains the user header view: picture and tagline
+   - [x] Contains a section with the users basic stats: # tweets, # following, # followers
+   - [x] Profile view should include that user's timeline
 - [x] User can load more tweets once they reach the bottom of the feed using infinite loading similar to the actual Twitter client.
 - [x] When composing, you should have a countdown in the upper right for the tweet limit.
 - [x] After creating a new tweet, a user should be able to view it in the timeline immediately without refetching the timeline from the network.

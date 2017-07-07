@@ -75,9 +75,22 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "profileTweetCell", for: indexPath) as! TweetCell
-        cell.tweet = tweets[indexPath.row]
-        return cell
+        let rowTweet = tweets[indexPath.row]
+        let originalTweet = rowTweet.originalTweet
+        print(originalTweet)
+        if let twit = originalTweet {
+            print("retweet")
+            let cell = tableView.dequeueReusableCell(withIdentifier: "profileRetweetCell", for: indexPath) as! RetweetCell
+            cell.retweeter = rowTweet.user
+            cell.tweet = twit
+            return cell
+        } else {
+            print("regular tweet")
+            let cell = tableView.dequeueReusableCell(withIdentifier: "profileTweetCell", for: indexPath) as! TweetCell
+            cell.tweet = rowTweet
+            return cell
+        }
+
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -95,14 +108,14 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     // Reload Tweet Data
     // ====================
     func reloadTweetData() {
-        APIManager.shared.getUserTimeLine { (tweets, error) in
+        APIManager.shared.getUserTimeLine (user: self.user,completion: { (tweets, error) in
             if let tweets = tweets {
                 self.tweets = tweets
                 self.tableView.reloadData()
             } else if let error = error {
                 print("Error getting user timeline: " + error.localizedDescription)
             }
-        }
+        })
     }
     
     // Reload User Data
@@ -111,7 +124,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         print(user)
         followersCount.text = String(describing: user.followersCount!)
         nameLabel.text = user.name
-        screenNameLabel.text = user.screenName
+        screenNameLabel.text = "@\(user.screenName)"
         //print("URL:", String(tweet.user.profile_imageURL))
         print("profile?")
         if let url = user.profileImageURL {

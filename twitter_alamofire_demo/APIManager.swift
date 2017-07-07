@@ -79,15 +79,15 @@ class APIManager: SessionManager {
 
         // This uses tweets from disk to avoid hitting rate limit. Comment out if you want fresh
         // tweets,
-//        if let data = UserDefaults.standard.object(forKey: "hometimeline_tweets") as? Data {
-//            let tweetDictionaries = NSKeyedUnarchiver.unarchiveObject(with: data) as! [[String: Any]]
-//            let tweets = tweetDictionaries.flatMap({ (dictionary) -> Tweet in
-//                Tweet(dictionary: dictionary)
-//            })
-//            
-//            completion(tweets, nil)
-//            return
-//        }
+        if let data = UserDefaults.standard.object(forKey: "hometimeline_tweets") as? Data {
+            let tweetDictionaries = NSKeyedUnarchiver.unarchiveObject(with: data) as! [[String: Any]]
+            let tweets = tweetDictionaries.flatMap({ (dictionary) -> Tweet in
+                Tweet(dictionary: dictionary)
+            })
+            
+            completion(tweets, nil)
+            return
+        }
         
         
         request(URL(string: "https://api.twitter.com/1.1/statuses/home_timeline.json")!, method: .get)
@@ -202,7 +202,7 @@ class APIManager: SessionManager {
     
     //--------------------------------------------------------------------------------//
     
-    func getUserTimeLine(completion: @escaping ([Tweet]?, Error?) -> ()) {
+    func getUserTimeLine(user: User, completion: @escaping ([Tweet]?, Error?) -> ()) {
         
         // This uses tweets from disk to avoid hitting rate limit. Comment out if you want fresh
         // tweets,
@@ -215,9 +215,9 @@ class APIManager: SessionManager {
 //            completion(tweets, nil)
 //            return
 //        }
-//        
+        let parameters = ["screen_name": user.screenName]
         
-        request(URL(string: "https://api.twitter.com/1.1/statuses/user_timeline.json")!, method: .get)
+        request(URL(string: "https://api.twitter.com/1.1/statuses/user_timeline.json")!, method: .get,parameters: parameters, headers: nil)
             .validate()
             .responseJSON { (response) in
                 guard response.result.isSuccess else {
