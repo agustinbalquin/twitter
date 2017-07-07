@@ -76,13 +76,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let rowTweet = tweets[indexPath.row]
-        let originalTweet = rowTweet.originalTweet
-        print(originalTweet)
-        if let twit = originalTweet {
+        if let rowUser = rowTweet.retweetedByUser {
             print("retweet")
             let cell = tableView.dequeueReusableCell(withIdentifier: "profileRetweetCell", for: indexPath) as! RetweetCell
-            cell.retweeter = rowTweet.user
-            cell.tweet = twit
+            cell.retweeter = rowUser
+            cell.tweet = rowTweet
             return cell
         } else {
             print("regular tweet")
