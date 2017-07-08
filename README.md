@@ -39,20 +39,27 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 
+- [x] Added Images to tweets
 - [x] Retweets show original tweet as in Twitter
 - [x] User profile also changes banner image
 - [x] List anything else that you can get done to improve the app functionality!
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
-1.
+1. 
 2.
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://i.imgur.com/gk0Xdai.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+<img src='http://i.imgur.com/5MhUky8.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+<img src='http://i.imgur.com/7SllzEo.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+<img src='http://i.imgur.com/GfKyGCS.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 

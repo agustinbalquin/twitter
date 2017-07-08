@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var followersCount: UILabel!
@@ -101,6 +103,10 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         return photoHeaderViewHeight
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
     
     
     // Reload Tweet Data
@@ -121,6 +127,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     func reloadUserData() {
         print(user)
         followersCount.text = String(describing: user.followersCount!)
+        followingCount.text = "\(user.followingCount!)"
         nameLabel.text = user.name
         screenNameLabel.text = "@\(user.screenName)"
         //print("URL:", String(tweet.user.profile_imageURL))

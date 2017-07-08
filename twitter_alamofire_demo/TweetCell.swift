@@ -12,6 +12,7 @@ import AlamofireImage
 class TweetCell: UITableViewCell {
     
 
+    @IBOutlet weak var tweetImage: UIImageView!
     @IBOutlet weak var retweetButton: UIButton!
     @IBOutlet weak var favCountLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
@@ -21,8 +22,11 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var retweetCountLabel: UILabel!
     @IBOutlet weak var createdAtLabel: UILabel!
     
+    @IBOutlet weak var imageConstraint: NSLayoutConstraint!
     @IBOutlet weak var rtButton: UIButton!
     @IBOutlet weak var favButton: UIButton!
+    
+    @IBOutlet weak var imageHeightConstraint: NSLayoutConstraint!
     
     var tweet: Tweet! {
         didSet {
@@ -36,6 +40,12 @@ class TweetCell: UITableViewCell {
             }
             retweetCountLabel.text = String(describing: tweet.retweetCount as! Int)
             createdAtLabel.text = tweet.createdAtString as? String
+            if let media = tweet.mediaUrl {
+                tweetImage.af_setImage(withURL: media)
+            } else {
+                self.imageConstraint.constant = 0//frame.height
+                self.imageHeightConstraint.constant = 0
+            }
             refreshCell()
             refreshCellRt()
         }
@@ -115,6 +125,12 @@ class TweetCell: UITableViewCell {
             }
         }
     }
+    
+    
+    
+    
+    
+    
     
     // Retweet tweet
     // =================
